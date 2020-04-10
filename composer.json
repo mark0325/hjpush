@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "mark0325\\hyperfJpush\\": "src/"
+            "mark0325\\hjpush\\": "src/"
         }
     }
 }
