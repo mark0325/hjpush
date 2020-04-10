@@ -1,0 +1,20 @@
+{
+    "name": "mark0325/hjpush",
+    "description": "hyperf jpush",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mark0325",
+            "email": "niuniu5100200@163.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "mark0325\\hyperfJpush\\": "src/"
+        }
+    }
+}
