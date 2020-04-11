@@ -12,10 +12,6 @@ declare(strict_types=1);
 
 namespace mark0325\hjpush;
 
-use Hyperf\Di\Annotation\AnnotationCollector;
-use Hyperf\Di\Annotation\AspectCollector;
-use Hyperf\Di\Command\InitProxyCommand;
-use Hyperf\Di\Listener\BootApplicationListener;
 
 class ConfigProvider
 {
