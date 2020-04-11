@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 namespace mark0325\hjpush\act;
 
-use Hyperf\Di\Exception\Exception;
 use mark0325\hjpush\Http;
 
 class Push {
@@ -226,7 +225,7 @@ class Push {
 
     /**
      * @return false|string
-     * @throws Exception
+     * @throws \Exception
      */
     private function buildBody() {
         if (empty($this->platform)) {
@@ -240,10 +239,10 @@ class Push {
         $data['audience'] = $this->audience;
 
         if (empty($this->notification)) {
-            throw new Exception('notification must be set');
+            throw new \Exception('notification must be set');
         }
         if (empty($this->notification['alert'])) {
-            throw new Exception('alert must be set');
+            throw new \Exception('alert must be set');
         }
 
         if (isset($this->notification['android']) && empty($this->notification['android']['alert'])) {
@@ -283,7 +282,6 @@ class Push {
      * @throws \Throwable
      */
     public function send() {
-        var_export($this->buildBody());
         return Http::post($this->url, $this->client->authorization, $this->buildBody());
     }
 }
