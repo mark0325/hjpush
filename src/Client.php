@@ -10,26 +10,18 @@ declare(strict_types=1);
 namespace mark0325\hjpush;
 
 
-use Hyperf\Contract\ConfigInterface;
 use mark0325\hjpush\act\Push;
 
 class Client {
 
-    /**
-     * @var ConfigInterface
-     */
-    private $config;
+    public $authorization;
+    public $production;
 
-    public function __construct(ConfigInterface $config) {
-        $this->config = $config;
-    }
-
-    /**
-     * 获取 header Authorization
-     * @return string
-     */
-    public function getAuthorization() {
-        return base64_encode("{$this->config->get('jpush.appKey')}:{$this->config->get('jpush.secret')}");
+    public function __construct() {
+        $appKey = config('jpush.appKey');
+        $secret = config('jpush.secret');
+        $this->production = config('jpush.production');
+        $this->authorization = "Basic " . base64_encode("{$appKey}:{$secret}");
     }
 
     /**

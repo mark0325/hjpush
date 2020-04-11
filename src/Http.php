@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace mark0325\hjpush;
 
-use Hyperf\Di\Exception\Exception;
 use Hyperf\Guzzle\HandlerStackFactory;
 use GuzzleHttp\Client;
 
@@ -33,7 +32,7 @@ class Http {
      * @param string $authorization
      * @param array $query
      * @return array
-     * @throws Exception
+     * @throws \Throwable
      */
     public static function get(string $url, string $authorization, array $query) {
         $response = self::getClient()->get($url, [
@@ -48,7 +47,7 @@ class Http {
      * @param string $authorization
      * @param string $body
      * @return array
-     * @throws Exception
+     * @throws \Throwable
      */
     public static function post(string $url, string $authorization, string $body) {
         $response = self::getClient()->post($url, [
@@ -61,12 +60,12 @@ class Http {
     /**
      * @param \Psr\Http\Message\ResponseInterface $response
      * @return array
-     * @throws Exception
+     * @throws \Throwable
      */
     private static function responseCheck($response) {
         $code = $response->getStatusCode();
         if ($code != 200) {
-            throw new Exception("request error ($code)");
+            throw new \Exception("request error ($code)");
         }
         $body = (string) $response->getBody();
         if (empty($body)) {
@@ -74,7 +73,7 @@ class Http {
         }
         $body = json_decode($body, true);
         if (isset($body['error'])) {
-            throw new Exception("business error, {$body['error']['message']} ({$body['error']['code']})");
+            throw new \Exception("business error, {$body['error']['message']} ({$body['error']['code']})");
         }
         return $body;
     }

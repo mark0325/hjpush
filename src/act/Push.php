@@ -127,7 +127,7 @@ class Push {
         if (is_array($val)) {
             $this->audience[$type] = array_merge($this->audience[$type], $val);
         } else {
-            $this->audience[$type] = $val;
+            $this->audience[$type][] = $val;
         }
     }
 
@@ -190,6 +190,9 @@ class Push {
      * @return $this
      */
     public function setOptions(array $option) {
+        if (!isset($option['apns_production'])) {
+            $option['apns_production'] = $this->client->production;
+        }
         $this->options = $option;
         return $this;
     }
@@ -244,7 +247,7 @@ class Push {
         }
 
         if (isset($this->notification['android']) && empty($this->notification['android']['alert'])) {
-            $this->notification['alert']['alert'] = $this->notification['alert'];
+            $this->notification['android']['alert'] = $this->notification['alert'];
         }
 
         if (isset($this->notification['ios']) && empty($this->notification['ios']['alert'])) {
@@ -260,6 +263,8 @@ class Push {
         }
         if ($this->options) {
             $data['options'] = $this->options;
+        } else {
+            $data['options'] = ['apns_production' => $this->client->production];
         }
         if ($this->callback) {
             $data['callback'] = $this->callback;
@@ -275,9 +280,10 @@ class Push {
 
     /**
      * @return array
-     * @throws Exception
+     * @throws \Throwable
      */
     public function send() {
-        return Http::post($this->url, $this->client->getAuthorization(), $this->buildBody());
+        var_export($this->buildBody());
+        return Http::post($this->url, $this->client->authorization, $this->buildBody());
     }
 }
