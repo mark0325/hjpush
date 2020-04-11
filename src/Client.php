@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace mark0325\hjpush;
 
 
+use mark0325\hjpush\act\Device;
 use mark0325\hjpush\act\Push;
 
 class Client {
@@ -29,5 +30,12 @@ class Client {
      */
     public function push() {
         return new Push($this);
+    }
+
+    /**
+     * @return Device
+     */
+    public function device() {
+        return new Device($this);
     }
 }

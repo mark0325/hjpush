@@ -58,6 +58,21 @@ class Http {
     }
 
     /**
+     * @param string $url
+     * @param string $authorization
+     * @param string $body
+     * @return array
+     * @throws \Throwable
+     */
+    public static function delete(string $url, string $authorization, string $body) {
+        $response = self::getClient()->delete($url, [
+            'headers' => ['Authorization' => $authorization],
+            'body' => $body,
+        ]);
+        return self::responseCheck($response);
+    }
+
+    /**
      * @param \Psr\Http\Message\ResponseInterface $response
      * @return array
      * @throws \Throwable
