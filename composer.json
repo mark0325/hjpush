@@ -19,7 +19,7 @@
     },
     "extra": {
         "hyperf": {
-            "config": "Hyperf\\Devtool\\ConfigProvider"
+            "config": "mark0325\\hjpush\\ConfigProvider"
         }
     }
 }
