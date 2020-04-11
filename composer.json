@@ -16,5 +16,10 @@
         "psr-4": {
             "mark0325\\hjpush\\": "src/"
         }
+    },
+    "extra": {
+        "hyperf": {
+            "config": "Hyperf\\Devtool\\ConfigProvider"
+        }
     }
 }
